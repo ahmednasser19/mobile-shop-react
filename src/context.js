@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { detailProduct, storeProducts } from "./data";
-import Product from "./components/Product";
-import CartTotals from "./components/Cart/CartTotals";
 
 const ProductContext = React.createContext();
 // provider
