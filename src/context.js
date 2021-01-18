@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { detailProduct, storeProducts } from "./data";
+import Product from "./components/Product";
 
 const ProductContext = React.createContext();
 // provider
@@ -10,6 +11,7 @@ class ProductProvider extends Component {
   state = {
     products: [],
     detailProduct: detailProduct,
+    cart: [],
   };
   componentDidMount() {
     this.setProducts();
@@ -35,7 +37,21 @@ class ProductProvider extends Component {
     });
   };
   addToCart = (id) => {
-    console.log(`hello form add to cart  : ${id}`);
+    let tempPtoduct = [...this.state.products];
+    const index = tempPtoduct.indexOf(this.getItem(id));
+    const product = tempPtoduct[index];
+    product.inCart = true;
+    product.count = 1;
+    const price = product.price;
+    product.total = price;
+    this.setState(
+      () => {
+        return { product: tempPtoduct, cart: [...this.state.cart, product] };
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
   };
 
   render() {
